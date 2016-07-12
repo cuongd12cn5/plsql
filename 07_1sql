@@ -1,0 +1,8 @@
+set serveroutput on;
+declare 
+  v_countryid varchar2(20):='CA';
+  v_country_record countries%rowtype;
+begin
+  select * into v_country_record from COUNTRIES where COUNTRY_ID=v_countryid;
+  DBMS_OUTPUT.PUT_LINE('Country ID: '||v_countryid||' Country Name: '||v_country_record.Country_name||' Region ID: '||v_country_record.region_id);
+end;

@@ -1,0 +1,22 @@
+SET serveroutput ON;
+DECLARE
+type dept_table_type
+IS
+  TABLE OF DEPARTMENTS.DEPARTMENT_NAME%type INDEX BY pls_integer;
+  my_dept_table dept_table_type;
+  f_loop_count NUMBER :=10;
+  v_deptno     NUMBER :=0;
+BEGIN
+  FOR i IN 1..f_loop_count
+  LOOP
+    v_deptno:=v_deptno+10;
+    SELECT department_name
+    INTO my_dept_table(i)
+    FROM departments
+    WHERE department_id = v_deptno;
+  END LOOP;
+  FOR i IN 1..f_loop_count
+  LOOP
+    DBMS_OUTPUT.PUT_LINE (my_dept_table(i));
+  END LOOP;
+END;
